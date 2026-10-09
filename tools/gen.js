@@ -1,0 +1,17 @@
+const {chromium}=require('playwright');const fs=require('fs');
+const path=require('path');process.chdir(__dirname);const css=fs.readFileSync('style.css','utf8');
+const star=`<svg width="28" height="28" viewBox="0 0 24 24"><path fill="#0F1222" d="M12 1c1 6.200 4.800 10 11 11-6.200 1-10 4.800-11 11-1-6.200-4.800-10-11-11C7.200 11 11 7.200 12 1z"/></svg>`;
+const tick=`<i><svg width="20" height="20" viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500" stroke="#0F1222" stroke-width="3.200" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></i>`;
+const body=p=>{
+ if(p.kind==='poll')return `<div class="grid" style="margin-top:38px">${p.items.map((t,i)=>`<div class="card row" style="justify-content:flex-start;gap:24px;padding:22px 26px"><div style="flex:none;width:58px;height:58px;border-radius:14px;background:#FFC53D;color:#0F1222;font:800 30px Sora;display:grid;place-items:center">${'ABCD'[i]}</div><div style="font:500 32px DM">${t}</div></div>`).join('')}</div>`;
+ if(p.kind==='keys')return `<div class="grid" style="grid-template-columns:1fr 1fr;margin-top:38px">${p.items.map(([k,t])=>`<div class="card" style="padding:20px 24px"><div style="font:800 30px Sora;color:#FFC53D">${k}</div><div style="font:500 24px DM;margin-top:8px">${t}</div></div>`).join('')}</div>`;
+ if(p.kind==='steps')return `<div class="grid" style="margin-top:36px;gap:14px">${p.items.map((t,i)=>`<div class="card row" style="justify-content:flex-start;gap:22px;padding:20px 26px"><div style="flex:none;font:800 40px Sora;color:#FFC53D;width:44px">${i+1}</div><div style="font:500 29px/1.3 DM">${t}</div></div>`).join('')}</div>`;
+ if(p.kind==='myth')return `<div class="grid" style="margin-top:40px"><div class="card"><div style="font:700 22px DM;letter-spacing:.14em;color:#A9B0CC">MYTH</div><div style="font:500 34px/1.3 DM;margin-top:10px;color:#A9B0CC;text-decoration:line-through">${p.items[0]}</div></div><div class="card" style="border-color:#FFC53D"><div style="font:700 22px DM;letter-spacing:.14em;color:#FFC53D">FACT</div><div style="font:500 34px/1.3 DM;margin-top:10px">${p.items[1]}</div></div></div>`;
+ return `<ul style="margin-top:32px">${p.items.map(t=>`<li>${tick}<span>${t}</span></li>`).join('')}</ul>`};
+(async()=>{const P=require(path.resolve(process.argv[2]||'./posts.js'));const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});
+for(const p of P){const pg=await b.newPage({viewport:{width:1080,height:1080}});
+const html=`<!doctype html><meta charset="utf-8"><style>${css} h1{font-size:${p.hs||74}px}</style><body><div class="ring"></div><div class="brand"><div class="mark">${star}</div>Bright Addons</div><div class="eyebrow" style="margin-top:80px">${p.eyebrow}</div><h1>${p.h1}</h1>${p.sub?`<p class="sub" style="margin-top:18px;font-size:31px">${p.sub}</p>`:''}${body(p)}<div class="foot"><b>brightaddons.com</b><span>${p.foot||'Premium Elementor widgets'}</span></div></body>`;
+fs.writeFileSync('g.html',html);await pg.goto('file://'+path.resolve('g.html'));await pg.evaluate(()=>document.fonts.ready);
+const over=await pg.evaluate(()=>{const f=document.querySelector('.foot').getBoundingClientRect().top;let m=0;document.querySelectorAll('body>*:not(.foot):not(.ring)').forEach(e=>m=Math.max(m,e.getBoundingClientRect().bottom));return Math.round(m-f)});
+await pg.screenshot({path:`../images/${p.date}-${p.slug}.png`});console.log(p.slug,over>-20?'OVERLAP '+over:'ok');await pg.close()}
+await b.close()})()
