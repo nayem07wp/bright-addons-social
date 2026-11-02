@@ -1,0 +1,6 @@
+const D='2026-11-02';
+module.exports=[
+{date:D,slug:'intl-ad-poll-hardest-part',eyebrow:'QUESTION FOR ELEMENTOR USERS',h1:'What slows down<br><em>your Elementor builds?</em>',kind:'poll',items:['Mobile layouts','Menus and headers','Forms and popups','Making it load fast'],foot:'Comment A, B, C or D',hs:68},
+{date:D,slug:'intl-ad-myth-elementor-pro',eyebrow:'MYTH VS FACT',h1:'Do you need Elementor Pro<br><em>for great widgets?</em>',kind:'myth',items:['You must buy Elementor Pro before your pages can look good.','Bright Addons works with free Elementor: 51 free widgets, free on WordPress.org.'],foot:'Free at brightaddons.com'},
+{date:D,slug:'intl-ad-black-friday',eyebrow:'BLACK FRIDAY: 50% OFF',h1:'Every Pro plan<br><em>half price.</em>',sub:'Bright Addons Pro for Elementor. No code needed.',kind:'list',items:['80 Pro widgets plus all 51 free widgets','10 extensions and a Theme Builder','From $18 a year, lifetime from $60','14-day money-back guarantee','Ends Cyber Monday, 30 November'],foot:'brightaddons.com/black-friday'},
+{date:D,slug:'intl-ad-this-or-that',eyebrow:'THIS OR THAT',h1:'Which would you<br><em>add first?</em>',kind:'poll',items:['A countdown for your sale','Floating WhatsApp and call buttons','Line art that draws itself','A QR code for your menu'],foot:'Tell us in the comments',hs:68}];
