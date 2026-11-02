@@ -1,0 +1,5 @@
+const D='2026-11-02';
+module.exports=[
+{date:D,slug:'boost-which-widget-first',eyebrow:'QUESTION FOR BUILDERS',h1:'Which free widget<br><em>would you try first?</em>',kind:'poll',items:['Countdown Timer','QR Code','Floating Contact Buttons','SVG Draw'],foot:'Comment A, B, C or D',hs:68},
+{date:D,slug:'boost-51-free-widgets',eyebrow:'FREE ELEMENTOR PLUGIN',h1:'51 free widgets.<br><em>Zero cost.</em>',sub:'Bright Addons for Elementor, free on WordPress.org.',kind:'list',items:['Countdown Timer, QR Code and SVG Draw','Floating WhatsApp, call and email buttons','Image Comparison, FAQ, Counter and more','Works with the free version of Elementor','Light and fast: only loads what you use'],foot:'Free at brightaddons.com'},
+{date:D,slug:'boost-built-for-freelancers',eyebrow:'FOR FREELANCERS AND AGENCIES',h1:'Build client sites<br><em>faster in Elementor.</em>',kind:'steps',items:['Install Bright Addons free from WordPress.org','Drag a widget onto the page','Change text and colors, no coding','Publish and deliver sooner'],foot:'Need more? 80 Pro widgets, from $18 a year'}];
